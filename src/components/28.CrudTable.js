@@ -2,7 +2,7 @@ import React from "react";
 import CrudTableRow from "./28.CrudTableRow";
 
 //recibe props pero cogemos props.data
-const CrudTable = ({ data }) => {
+const CrudTable = ({ data, setDataToEdit, deleteData }) => {
   return (
     <div>
       <h3>Tabla de Datos</h3>
@@ -23,8 +23,14 @@ const CrudTable = ({ data }) => {
           ) : (
             //descomponemos todos los json con map que crea el bucle
             data.map((elemento) => (
-              //pasamos key para que no haya duplicados y tal y el elemento
-              <CrudTableRow key={elemento.id} elemento={elemento} />
+              <CrudTableRow
+                //pasamos key para que no haya duplicados y tal y el elemento
+                key={elemento.id}
+                elemento={elemento}
+                // pasamos los eventos del hijo al padre y al reves
+                setDataToEdit={setDataToEdit}
+                deleteData={deleteData}
+              />
             ))
           )}
         </tbody>

@@ -14,6 +14,16 @@ const CrudForm = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
   }
   const [form, setForm] = useState(initiacialForm);
 
+  useEffect(() => {
+    // si cambia el estado de dataToEdit que es null por defecto asigna los valores
+    // a los input del form porque se ha pulsado el boton editar de un elemento de la clase CrudTableRow
+    if (dataToEdit) {
+      setForm(dataToEdit);
+    } else {
+      setForm(initiacialForm);
+    }
+  }, [dataToEdit]);
+
   const handleChange = (e) => {
     setForm({
       // lo que ya tenga el objeto , nombre del objeto : valor del objeto
@@ -49,7 +59,8 @@ const CrudForm = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
 
   return (
     <div>
-      <h3>Agregar</h3>
+      {/*si tiene valor ? true : falso */}
+      <h3>{dataToEdit ? "Editar" : "Agregar"}</h3>
       {/*evento del submit*/}
       <form onSubmit={handleSubmit}>
         <input

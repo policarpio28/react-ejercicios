@@ -35,6 +35,7 @@ const CrudApp = () => {
   // esto es lo q nos traeria de bbdd q es un json
   const [db, setDb] = useState(inicialDb);
 
+  // elemento que se va a editar
   const [dataToEdit, setDataToEdit] = useState(null);
 
   // añade un registro al array y repinta el render
@@ -42,9 +43,17 @@ const CrudApp = () => {
     // creamos un id
     data.id = Date.now();
     // lo que ya tenga el objeto , objeto a añadir
+    // repinta el render
     setDb([...db, data]);
   };
-  const updateData = (data) => {};
+
+  const updateData = (data) => {
+    // comparamos el elemento, si es el mismo id reemplzamos el elemento por
+    //el data que es modificado sino dejamos el mismo
+    let newData = db.map((el) => (el.id === data.id ? data : el));
+    // añadimos la nueva lista |  repinta el render
+    setDb(newData);
+  };
   const delateData = (id) => {};
 
   return (
@@ -59,7 +68,11 @@ const CrudApp = () => {
         setDataToEdit={setDataToEdit}
       />
       {/*tabla donde mostrar todo pasando los objetos*/}
-      <CrudTable data={db} updateData={updateData} delateData={delateData} />
+      <CrudTable
+        data={db}
+        setDataToEdit={setDataToEdit}
+        delateData={delateData}
+      />
     </>
   );
 };
