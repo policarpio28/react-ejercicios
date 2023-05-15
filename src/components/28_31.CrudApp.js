@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import CrudForm from "./28.CrudForm";
-import CrudTable from "./28.CrudTable";
+import CrudForm from "./28_31.CrudForm";
+import CrudTable from "./28_31.CrudTable";
 
 // constante con todos los objetos json
 const inicialDb = [
@@ -54,25 +54,42 @@ const CrudApp = () => {
     // añadimos la nueva lista |  repinta el render
     setDb(newData);
   };
-  const delateData = (id) => {};
+
+  const deleteData = (id) => {
+    let isDelete = window.confirm(
+      `Estas seguro de eliminar el registro con id '${id}' ??`
+    );
+
+    if (isDelete) {
+      // soltra por los elemento que no es el id pasado para nuevo añadirlos a la setData
+      //en vez de hacer un delete del propio elemento
+      let newData = db.filter((el) => el.id !== id);
+      // añadimos la nueva lista |  repinta el render
+      setDb(newData);
+    } else {
+      return;
+    }
+  };
 
   return (
     <>
       <h2>CRUD App con datos locales (Sin apis)</h2>
-      {/*formulario para añadir mas objetos*/}
-      <CrudForm
-        //en vez de crear los metodos en el form se los pasamos desde aqui para probar q se puede hacer
-        createData={createData}
-        updateData={updateData}
-        dataToEdit={dataToEdit}
-        setDataToEdit={setDataToEdit}
-      />
-      {/*tabla donde mostrar todo pasando los objetos*/}
-      <CrudTable
-        data={db}
-        setDataToEdit={setDataToEdit}
-        delateData={delateData}
-      />
+      <article className="grid-1-2">
+        {/*formulario para añadir mas objetos*/}
+        <CrudForm
+          //en vez de crear los metodos en el form se los pasamos desde aqui para probar q se puede hacer
+          createData={createData}
+          updateData={updateData}
+          dataToEdit={dataToEdit}
+          setDataToEdit={setDataToEdit}
+        />
+        {/*tabla donde mostrar todo pasando los objetos*/}
+        <CrudTable
+          data={db}
+          setDataToEdit={setDataToEdit}
+          deleteData={deleteData}
+        />
+      </article>
     </>
   );
 };

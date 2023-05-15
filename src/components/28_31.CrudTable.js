@@ -1,12 +1,12 @@
 import React from "react";
-import CrudTableRow from "./28.CrudTableRow";
+import CrudTableRow from "./28_31.CrudTableRow";
 
 //recibe props pero cogemos props.data
 const CrudTable = ({ data, setDataToEdit, deleteData }) => {
   return (
     <div>
       <h3>Tabla de Datos</h3>
-      <table border="1px">
+      <table>
         <thead>
           <tr>
             <th>Nombre</th>
