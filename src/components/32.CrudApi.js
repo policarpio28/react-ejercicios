@@ -44,7 +44,7 @@ const CrudApi = () => {
 
   return (
     <>
-      <h2>CRUD App con datos locales (Sin apis)</h2>
+      <h2>CRUD API con simulacion de API</h2>
       <article className="grid-1-2">
         {/*formulario para añadir mas objetos*/}
         <CrudForm
