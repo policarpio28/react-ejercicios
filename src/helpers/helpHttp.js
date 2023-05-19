@@ -42,10 +42,8 @@ export const helpHttp = () => {
       .catch((err) => err);
   };
 
-  // SOLICITA DATOS
-  const get = (url, options = {}) => {
-    customFetch(url, options);
-  };
+  // SOLICITA DATOS  poner en un sola linea sino no funciona
+  const get = (url, options = {}) => customFetch(url, options);
 
   // ENVIA DATOS Y EL SERVER LO TRATA COMO QUIERA
   const post = (url, options = {}) => {

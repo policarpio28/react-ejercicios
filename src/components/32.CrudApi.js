@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CrudForm from "./28_31.CrudForm";
 import CrudTable from "./28_31.CrudTable";
+import { helpHttp } from "../helpers/helpHttp";
 
 const CrudApi = () => {
   // esto es lo q nos traeria de bbdd q es un json
@@ -8,6 +9,23 @@ const CrudApi = () => {
 
   // elemento que se va a editar
   const [dataToEdit, setDataToEdit] = useState(null);
+
+  // hepl y ruta
+  let api = helpHttp();
+  let ruta = "http://localhost:5000/santos";
+
+  // llamada al cargar la pag la primera vez
+  useEffect(() => {
+    api.get(ruta).then((res) => {
+      //console.log(res);
+      //cuando la respuesta no traiga err que se puso en Promise.reject(
+      if (!res.err) {
+        setDb(res);
+      } else {
+        setDb(null);
+      }
+    });
+  }, []);
 
   // añade un registro al array y repinta el render
   const createData = (data) => {
