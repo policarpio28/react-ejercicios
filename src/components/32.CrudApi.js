@@ -2,28 +2,38 @@ import React, { useState, useEffect } from "react";
 import CrudForm from "./28_31.CrudForm";
 import CrudTable from "./28_31.CrudTable";
 import { helpHttp } from "../helpers/helpHttp";
+import Loader from "./35.Loader";
+import Message from "./35.Message";
 
 const CrudApi = () => {
   // esto es lo q nos traeria de bbdd q es un json
-  const [db, setDb] = useState([]);
+  const [db, setDb] = useState(null);
 
   // elemento que se va a editar
   const [dataToEdit, setDataToEdit] = useState(null);
 
-  // hepl y ruta
+  // si hay algun error o si esta cargando
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  // help y ruta
   let api = helpHttp();
   let ruta = "http://localhost:5000/santos";
 
   // llamada al cargar la pag la primera vez
   useEffect(() => {
+    setLoading(true);
     api.get(ruta).then((res) => {
       //console.log(res);
       //cuando la respuesta no traiga err que se puso en Promise.reject(
       if (!res.err) {
         setDb(res);
+        setError(null);
       } else {
         setDb(null);
+        setError(res);
       }
+      setLoading(false);
     });
   }, []);
 
@@ -72,12 +82,23 @@ const CrudApi = () => {
           dataToEdit={dataToEdit}
           setDataToEdit={setDataToEdit}
         />
-        {/*tabla donde mostrar todo pasando los objetos*/}
-        <CrudTable
-          data={db}
-          setDataToEdit={setDataToEdit}
-          deleteData={deleteData}
-        />
+        {/*cuando carge muestra el loading*/}
+        {loading && <Loader />}
+        {/*cuando cargue muestra el loading*/}
+        {error && (
+          <Message
+            msg={`Error ${error.status}: ${error.statusText}`}
+            bgColor={"#dc3545"}
+          />
+        )}
+        {/*tabla donde mostrar todo pasando los objetos | solo se muestra si tiene datos*/}
+        {db && (
+          <CrudTable
+            data={db}
+            setDataToEdit={setDataToEdit}
+            deleteData={deleteData}
+          />
+        )}
       </article>
     </>
   );
