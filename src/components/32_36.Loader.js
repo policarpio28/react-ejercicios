@@ -1,5 +1,5 @@
 import React from "react";
-import "./35.Loader.css";
+import "./32_36.Loader.css";
 
 // loader sacado de la pag https://loading.io/
 const Loader = () => {

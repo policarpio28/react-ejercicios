@@ -16,11 +16,7 @@ const CrudTable = ({ data, setDataToEdit, deleteData }) => {
         </thead>
         <tbody>
           {/*si no hay datos pone el sin datos sino el otro pasandole cada elemento destructurado*/}
-          {data.length === 0 ? (
-            <tr>
-              <td colSpan="3">Sin datos</td>
-            </tr>
-          ) : (
+          {data.length > 0 ? (
             //descomponemos todos los json con map que crea el bucle
             data.map((elemento) => (
               <CrudTableRow
@@ -32,6 +28,10 @@ const CrudTable = ({ data, setDataToEdit, deleteData }) => {
                 deleteData={deleteData}
               />
             ))
+          ) : (
+            <tr>
+              <td colSpan="3">Sin datos</td>
+            </tr>
           )}
         </tbody>
       </table>

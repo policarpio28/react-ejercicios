@@ -61,7 +61,7 @@ const CrudApp = () => {
     );
 
     if (isDelete) {
-      // soltra por los elemento que no es el id pasado para nuevo añadirlos a la setData
+      // filtra por los elemento que no es el id pasado para nuevo añadirlos a la setData
       //en vez de hacer un delete del propio elemento
       let newData = db.filter((el) => el.id !== id);
       // añadimos la nueva lista |  repinta el render
