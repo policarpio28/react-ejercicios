@@ -51,6 +51,12 @@ hr {
   margin: 2rem auto;
 }
 
+/* con esto las imagenes se hacen responsivas*/
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 table {
   border-spacing: 0;
   border-collapse: collapse;
@@ -65,9 +71,18 @@ td {
 }
 
 @media screen and (min-width: 1024px) {
+  /* en una ventana de minimo 1024px se crea un grid de 1 y 2*/
   .grid-1-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 2rem;
+  }
+
+  /* en una ventana de minimo 1024px se crea un grid de 1 y 3*/
+  .grid-1-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: start;
     gap: 2rem;
   }

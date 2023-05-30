@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import SongForm from "./37.SongForm";
-import SongDetails from "./37.SongDetails";
+import SongForm from "./37_41.SongForm";
+import SongDetails from "./37_41.SongDetails";
 import Loader from "./32_36.Loader";
 import { helpHttp } from "../helpers/32_36.helpHttp";
 
@@ -29,7 +29,8 @@ const SongSearch = () => {
         helpHttp().get(artistUrl),
         helpHttp().get(cancionUrl),
       ]);
-
+      console.log(artistRes);
+      console.log(cancionRes);
       //setea los valores de la respuesta
       setBiografia(artistRes);
       setCancion(cancionRes);
@@ -47,11 +48,17 @@ const SongSearch = () => {
   return (
     <div>
       <h2>Buscador de canciones</h2>
-      {loading && <Loader />}
-      <SongForm handleSearch={handleSearch} />
-      {search && !loading && (
-        <SongDetails search={search} cancion={cancion} biografia={biografia} />
-      )}
+      <article className="grid-1-3">
+        <SongForm handleSearch={handleSearch} />
+        {loading && <Loader />}
+        {search && !loading && (
+          <SongDetails
+            search={search}
+            cancion={cancion}
+            biografia={biografia}
+          />
+        )}
+      </article>
     </div>
   );
 };

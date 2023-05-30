@@ -1,6 +1,6 @@
 import React from "react";
-import SongArtist from "./37.SongArtist";
-import SongCancion from "./37.SongCancion";
+import SongArtist from "./37_41.SongArtist";
+import SongCancion from "./37_41.SongCancion";
 import Message from "./32_36.Message";
 
 const SongDetails = ({ search, cancion, biografia }) => {
@@ -17,10 +17,12 @@ const SongDetails = ({ search, cancion, biografia }) => {
             bgColor="#dc3545"
           />
         ) : (
-          <SongCancion />
+          //cancion.lyrics el lyrics es la propiedad q devuelve la API
+          <SongCancion titulo={search.cancion} cancion={cancion.lyrics} />
         )}
         {biografia.artist ? (
-          <SongArtist />
+          //biografia.artists[0] es lo que devuelve la API y queremos el de la posicion 0
+          <SongArtist artist={biografia.artists[0]} />
         ) : (
           <Message
             msg={`Error: no existe el cantante ${search.artist}`}
