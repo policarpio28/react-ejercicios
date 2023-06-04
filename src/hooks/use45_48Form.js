@@ -8,9 +8,16 @@ export const use45_48Form = (initialForm, validateForm) => {
   const [response, setResponse] = useState(null);
 
   // eventos de los input y formulario
-  const handleChange = (e) => {};
-  // cuando pierde el foco
-  const handleBlur = (e) => {};
+  // crea una copia y actualiza el elemento que cambia
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+  // cuando pierde el foco y lo usaremos para comprobar la validacion
+  const handleBlur = (e) => {
+    handleChange(e);
+    setErrors(validateForm(form));
+  };
   const handleSubmit = (e) => {};
 
   return {

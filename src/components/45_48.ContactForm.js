@@ -1,8 +1,30 @@
 import React from "react";
 import { use45_48Form } from "../hooks/use45_48Form";
 
-const initialForm = {};
-const validationsForm = (form) => {};
+//valores iniciales
+const initialForm = {
+  name: "",
+  email: "",
+  subject: "",
+  textarea: "",
+};
+
+// funcion de las validaciones || la ponemos aqui xq si se pone en el use quizas hay
+// validaciones que no nos interesa para otros sitios
+const validationsForm = (form) => {
+  let errors = {};
+
+  if (!form.name.trim()) {
+    errors.name = "El campo Nombre es obligatorio";
+  }
+
+  return errors;
+};
+
+let styles = {
+  fontWeight: "bold",
+  color: "#dc3545",
+};
 
 const ContactForm = () => {
   // cosas que nos devuelve el use personalizado
@@ -30,6 +52,8 @@ const ContactForm = () => {
           value={form.name}
           required
         />
+        {/*ensaje de error*/}
+        {errors.name && <p style={styles}>{errors.name}</p>}
 
         <input
           type="email"
@@ -41,6 +65,7 @@ const ContactForm = () => {
           value={form.email}
           required
         />
+        {errors.email && <p style={styles}>{errors.email}</p>}
 
         <input
           type="text"
@@ -52,6 +77,7 @@ const ContactForm = () => {
           value={form.subject}
           required
         />
+        {errors.subject && <p style={styles}>{errors.subject}</p>}
 
         <textarea
           name="comments"
@@ -64,6 +90,7 @@ const ContactForm = () => {
           value={form.comments}
           required
         />
+        {errors.comments && <p style={styles}>{errors.comments}</p>}
 
         <input type="submit" value="Enviar" />
       </form>
