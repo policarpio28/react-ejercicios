@@ -1,5 +1,7 @@
 import React from "react";
 import { use45_48Form } from "../hooks/use45_48Form";
+import Loader from "./32_36.Loader";
+import Message from "./32_36.Message";
 
 //valores iniciales
 const initialForm = {
@@ -118,7 +120,18 @@ const ContactForm = () => {
         {errors.comments && <p style={styles}>{errors.comments}</p>}
 
         <input type="submit" value="Enviar" />
+
+        <input
+          type="hidden"
+          name="_subject"
+          value="Nuevo correo pregunta!"
+        ></input>
       </form>
+
+      {loading && <Loader />}
+      {response && (
+        <Message msg="Los datos han sido enviados" bgColor="#198754" />
+      )}
     </div>
   );
 };
