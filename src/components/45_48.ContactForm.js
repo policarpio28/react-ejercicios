@@ -6,16 +6,41 @@ const initialForm = {
   name: "",
   email: "",
   subject: "",
-  textarea: "",
+  comments: "",
 };
 
 // funcion de las validaciones || la ponemos aqui xq si se pone en el use quizas hay
 // validaciones que no nos interesa para otros sitios
 const validationsForm = (form) => {
   let errors = {};
+  // expresiones regulares
+  //hace que solo acepte de la A-Z y los acentos y Ñ y espacion en blanco \s
+  let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
+  //para el email
+  let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
+  // para que el maximo sea 255 caracteres
+  let regexComments = /^.{1,255}$/;
 
   if (!form.name.trim()) {
     errors.name = "El campo Nombre es obligatorio";
+  } else if (!regexName.test(form.name.trim())) {
+    errors.name = "El campo Nombre solo acepta letras y espacios en blanco";
+  }
+
+  if (!form.email.trim()) {
+    errors.email = "El campo Email es obligatorio";
+  } else if (!regexEmail.test(form.email.trim())) {
+    errors.email = "El campo Email es incorrecto";
+  }
+
+  if (!form.subject.trim()) {
+    errors.subject = "El campo Asunto es obligatorio";
+  }
+
+  if (!form.comments.trim()) {
+    errors.comments = "El campo Comentarios es obligatorio";
+  } else if (!regexComments.test(form.comments.trim())) {
+    errors.comments = "El campo Comentarios solo acepta 255 caracteres";
   }
 
   return errors;

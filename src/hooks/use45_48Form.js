@@ -16,6 +16,8 @@ export const use45_48Form = (initialForm, validateForm) => {
   // cuando pierde el foco y lo usaremos para comprobar la validacion
   const handleBlur = (e) => {
     handleChange(e);
+
+    // podemos validar mejor en el submit y no hacer el BLUR
     setErrors(validateForm(form));
   };
   const handleSubmit = (e) => {};
