@@ -1,7 +1,14 @@
 import { useState } from "react";
-import { helpHttp } from "../helpers/32_36.helpHttp";
 
-export const use45_48Form = (initialForm, validateForm) => {
+// inicializado a falso
+export const use45_48Modal = (initialValue = false) => {
   // partes de los q es la gestion del formulario
-  const [form, setForm] = useState(initialForm);
+  const [isOpen, setIsOpen] = useState(initialValue);
+
+  const openModal = () => setIsOpen(true);
+
+  const closeModal = () => setIsOpen(false);
+
+  // retorno y lo pone con [] xq yo que sé
+  return [isOpen, openModal, closeModal];
 };
